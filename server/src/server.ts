@@ -1,9 +1,9 @@
 import express from 'express'
+import routes from './routes'
 
 const app = express()
+app.use(express.json())
 
-app.get('/hello-word', (request, response) => {
-  response.json({ msg: 'hello-word' })
-})
+app.use(routes)
 
 app.listen(3333)
