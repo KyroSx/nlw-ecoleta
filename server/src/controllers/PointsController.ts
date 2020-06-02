@@ -3,6 +3,24 @@ import { Request, Response } from 'express'
 import knex from '../database/connection'
 
 class PointsController {
+  async index (request: Request, response: Response) {
+    const { city, uf, items } = request.query
+
+    const parsedItems = String(items)
+      .split(',')
+      .map(item => Number(item.trim()))
+
+    const points = await knex('points')
+      .join('point_items', 'points.id', '=', 'point_items.point_id')
+      .whereIn('point_items.item_id', parsedItems)
+      .where('city', String(city))
+      .where('uf', String(uf))
+      .distinct()
+      .select('points.*')
+
+    return response.json(points)
+  }
+
   async show (request: Request, response: Response) {
     const { id } = request.params
 
@@ -24,8 +42,10 @@ class PointsController {
 
   async create (request: Request, response: Response) {
     const {
-      name, email, whatsapp, latitude,
-      longitude, city, uf, items
+      name, email,
+      whatsapp, latitude,
+      longitude, city, uf,
+      items
     } = request.body
 
     const trx = await knex.transaction()
@@ -37,25 +57,27 @@ class PointsController {
       whatsapp,
       latitude,
       longitude,
-      uf,
-      city
+      city,
+      uf
     }
 
-    const ids = await trx('points').insert(point)
+    const insertedIds = await trx('points').insert(point)
 
-    const idPoint = ids[0]
+    const pointId = insertedIds[0]
 
-    const pointItems = items.map((itemID: number) => {
+    const pointItems = items.map((itemId: number) => {
       return {
-        item_id: itemID,
-        point_id: idPoint
+        item_id: itemId,
+        point_id: pointId
       }
     })
 
     await trx('point_items').insert(pointItems)
 
+    await trx.commit()
+
     return response.json({
-      id: idPoint,
+      pointId,
       ...point
     })
   }
