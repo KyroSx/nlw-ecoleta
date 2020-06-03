@@ -12,4 +12,3 @@ Project in development, based on Next Level Week by [Rocketseat](https://rockets
 ## Project 📋
 
 Ecoleta aims to connect people who need to dispose of their waste and residues, with establishments that collect this waste.
-
