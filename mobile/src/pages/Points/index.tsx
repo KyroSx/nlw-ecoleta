@@ -1,9 +1,46 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
+import Constants from 'expo-constants'
+import { Feather as Icon } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import MapView from 'react-native-maps'
 
 const Points = () => {
+  const navigation = useNavigation()
+  const handleNavigateBack = () => {
+    navigation.goBack()
+  }
+
   return (
-    <>{styles}</>
+    <>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={handleNavigateBack}>
+          <Icon name="arrow-left" size={20} color="#34CB79" ></Icon>
+        </TouchableOpacity>
+
+        <Text style={styles.title}>
+          Bem-vindo
+        </Text>
+
+        <Text style={styles.description}>
+          Encontre no mapa um ponto de coleta
+        </Text>
+
+        <View style={styles.mapContainer}>
+          <MapView style={styles.map}>
+
+          </MapView>
+        </View>
+
+        <View style={styles.itemsContainer}>
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() => {}}
+          ></TouchableOpacity>
+        </View>
+
+      </View>
+    </>
   )
 }
 
