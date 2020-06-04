@@ -43,12 +43,12 @@ const Points = () => {
       params: {
         city: 'Gorpa',
         uf: 'pr',
-        items: [1, 2]
+        items: selectedIems
       }
     }).then(response => {
       setPoints(response.data)
     })
-  }, [])
+  }, [selectedIems])
 
   useEffect(() => {
     const loadPosition = async () => {
