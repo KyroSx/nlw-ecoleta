@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native'
-import Constants from 'expo-constants'
 import { Feather as Icon } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import { SvgUri } from 'react-native-svg'
+import Constants from 'expo-constants'
 import MapView from 'react-native-maps'
 
 const Points = () => {
@@ -36,7 +37,15 @@ const Points = () => {
           <TouchableOpacity
             style={styles.item}
             onPress={() => {}}
-          ></TouchableOpacity>
+          >
+            <SvgUri
+              width={42}
+              height={42}
+              uri=""
+            >
+
+            </SvgUri>
+          </TouchableOpacity>
         </View>
 
       </View>
