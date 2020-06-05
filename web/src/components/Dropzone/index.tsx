@@ -15,6 +15,8 @@ const Dropzone: React.FC<DropzoneProps> = ({ onFileUpload }) => {
   const onDrop = useCallback(acceptedFiles => {
     const file = acceptedFiles[0]
 
+    if (!file) {return}
+
     const fileUrl = URL.createObjectURL(file)
 
     setSelectedFileUrl(fileUrl)
