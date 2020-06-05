@@ -2,13 +2,17 @@
 import { Request, Response } from 'express'
 import knex from '../database/connection'
 
+const parseItems = (items: string) => {
+  return items
+    .split(',')
+    .map(item => Number(item.trim()))
+}
+
 class PointsController {
   async index (request: Request, response: Response) {
     const { city, uf, items } = request.query
 
-    const parsedItems = String(items)
-      .split(',')
-      .map(item => Number(item.trim()))
+    const parsedItems = parseItems(String(items))
 
     const points = await knex('points')
       .join('point_items', 'points.id', '=', 'point_items.point_id')
@@ -50,8 +54,10 @@ class PointsController {
 
     const trx = await knex.transaction()
 
+    const image = request.file.filename
+
     const point = {
-      image: 'https://images.unsplash.com/photo-1591099429057-b2c57ced7326?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60',
+      image,
       name,
       email,
       whatsapp,
@@ -65,7 +71,9 @@ class PointsController {
 
     const pointId = insertedIds[0]
 
-    const pointItems = items.map((itemId: number) => {
+    const parsedItems = parseItems(String(items))
+
+    const pointItems = parsedItems.map((itemId: number) => {
       return {
         item_id: itemId,
         point_id: pointId
