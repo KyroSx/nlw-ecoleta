@@ -4,7 +4,7 @@
 */.pnp.js
 
 # storage
-node/uploads
+node/uploads/*
 
 # keeping
 !server/uploads/.gitkeep
