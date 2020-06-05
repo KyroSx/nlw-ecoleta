@@ -1,13 +1,14 @@
 /* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react'
-import { View, TouchableOpacity, Text, ScrollView, Image, Alert } from 'react-native'
+import { View, TouchableOpacity, Text, ScrollView, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { SvgUri } from 'react-native-svg'
-import MapView, { Marker } from 'react-native-maps'
+import MapView from 'react-native-maps'
 import * as Location from 'expo-location'
 
 import BackButton from '../components/backButton'
 import styles from './styles'
+import MapMarker from './components/MapMarker'
 
 import api from '../../services/api'
 
@@ -31,6 +32,8 @@ const Points = () => {
   const [selectedIems, setSelectedIems] = useState<number[]>([])
 
   const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0])
+
+  const navigation = useNavigation()
 
   useEffect(() => {
     api.get('items').then(response => {
@@ -67,8 +70,6 @@ const Points = () => {
 
     loadPosition()
   })
-
-  const navigation = useNavigation()
 
   const handleNavigateToDetail = (point_id: number) => {
     navigation.navigate('Detail', { point_id })
@@ -113,25 +114,18 @@ const Points = () => {
             >
               {
                 points.map(point => (
-                  <Marker
-                    key={String(point.id)}
-                    style={styles.mapMarker}
-                    onPress={() => handleNavigateToDetail(point.id)}
-                    coordinate={{
+                  <MapMarker
+                    key={point.id}
+                    point={{
+                      id: point.id,
+                      name: point.name,
+                      image: point.image,
                       latitude: point.latitude,
                       longitude: point.longitude
                     }}
-                  >
-                    <View style={styles.mapMarkerContainer}>
-                      <Image
-                        style={styles.mapMarkerImage}
-                        source={{ uri: point.image }}
-                      />
-                      <Text style={styles.mapMarkerTitle}>
-                        {point.name}
-                      </Text>
-                    </View>
-                  </Marker>
+                    handleNavigateToDetail={handleNavigateToDetail}
+                  />
+
                 ))
               }
 
