@@ -22,6 +22,7 @@ interface Point {
   id: number,
   name: string,
   image: string,
+  image_url: string,
   latitude: number,
   longitude: number,
 }
@@ -114,12 +115,13 @@ const Points = () => {
             >
               {
                 points.map(point => (
+
                   <MapMarker
                     key={point.id}
                     point={{
                       id: point.id,
                       name: point.name,
-                      image: point.image,
+                      image: point.image_url,
                       latitude: point.latitude,
                       longitude: point.longitude
                     }}

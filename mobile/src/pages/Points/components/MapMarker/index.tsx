@@ -20,6 +20,7 @@ interface MapMarkerProps {
 const MapMarker = ({ point, handleNavigateToDetail }: MapMarkerProps) => {
   return (
     <Marker
+      key={String(point.id)}
       style={styles.mapMarker}
       onPress={() => handleNavigateToDetail(point.id)}
       coordinate={{

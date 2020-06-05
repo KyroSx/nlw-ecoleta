@@ -3,6 +3,12 @@
 */.pnp
 */.pnp.js
 
+# storage
+node/uploads
+
+# keeping
+!server/uploads/.gitkeep
+
 # testing
 */coverage
 

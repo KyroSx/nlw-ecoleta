@@ -21,6 +21,7 @@ interface Item {
 
 interface Point {
   image: string,
+  image_url: string,
   name: string,
   email: string,
   whatsapp: string,
@@ -71,7 +72,7 @@ const Detail = () => {
 
         <Image
           style={styles.pointImage}
-          source={{ uri: responseData.point.image }}
+          source={{ uri: responseData.point.image_url }}
         />
         <Text style={styles.pointName}>{responseData.point.name}</Text>
         <Text style={styles.pointItems}>
