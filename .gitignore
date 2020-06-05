@@ -4,10 +4,10 @@
 */.pnp.js
 
 # storage
-server/uploads/*
+*/uploads/*
 
 # keeping
-!server/uploads/.gitkeep
+!*/uploads/.gitkeep
 
 # testing
 */coverage
