@@ -115,6 +115,7 @@ const Points = () => {
             >
               {
                 points.map(point => (
+
                   <MapMarker
                     key={point.id}
                     point={{
