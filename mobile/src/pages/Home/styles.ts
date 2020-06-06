@@ -38,6 +38,10 @@ const styles = StyleSheet.create({
 
   select: {},
 
+  fullScreen: {
+    flex: 1
+  },
+
   input: {
     height: 60,
     backgroundColor: '#FFF',

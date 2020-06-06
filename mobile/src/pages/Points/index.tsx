@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react'
 import { View, TouchableOpacity, Text, ScrollView, Alert } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { SvgUri } from 'react-native-svg'
 import MapView from 'react-native-maps'
 import * as Location from 'expo-location'
@@ -11,6 +11,11 @@ import styles from './styles'
 import MapMarker from './components/MapMarker'
 
 import api from '../../services/api'
+
+interface Params {
+  uf: string,
+  city: string
+}
 
 interface Item {
   id: number,
@@ -35,6 +40,8 @@ const Points = () => {
   const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0])
 
   const navigation = useNavigation()
+  const route = useRoute()
+  const routeParams = route.params as Params
 
   useEffect(() => {
     api.get('items').then(response => {
@@ -43,10 +50,12 @@ const Points = () => {
   }, [])
 
   useEffect(() => {
+    const { city, uf } = routeParams
+
     api.get('points', {
       params: {
-        city: 'Gorpa',
-        uf: 'pr',
+        city: city,
+        uf: uf,
         items: selectedIems
       }
     }).then(response => {
@@ -70,7 +79,7 @@ const Points = () => {
     }
 
     loadPosition()
-  })
+  }, [])
 
   const handleNavigateToDetail = (point_id: number) => {
     navigation.navigate('Detail', { point_id })

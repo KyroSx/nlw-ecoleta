@@ -26,4 +26,5 @@
 */yarn-debug.log*
 */yarn-error.log*
 
+**/**.sqlite
 server/src/database/database.sqlite
