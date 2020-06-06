@@ -18,7 +18,7 @@ routes.get('/items', itemsController.index)
 routes.post(
   '/points',
   upload.single('image'),
-  pointsValidator.validateIndex,
+  pointsValidator.validateIndex(),
   pointsController.create
 )
 
