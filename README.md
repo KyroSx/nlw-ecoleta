@@ -1,9 +1,6 @@
-<div align="center">
-    <img src="https://res.cloudinary.com/stefanosaffran/image/upload/v1591433716/Omnistack/tkp3avuykaqfpvydmt0i.svg" width="300px"/>
-</div>
+# ECOLETA ♻️
 
 Project in development, based on **Next Level Week 01** by [Rocketseat](https://rocketseat.com.br/).
-
 
 ## Technologis 🛠️
 
