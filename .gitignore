@@ -4,7 +4,11 @@
 */.pnp.js
 
 # storage
+<<<<<<< HEAD
 */uploads/*
+=======
+node/uploads/*
+>>>>>>> 687f0643f0c70560b6018a8f2828f73a36d46af8
 
 # keeping
 !*/uploads/.gitkeep
